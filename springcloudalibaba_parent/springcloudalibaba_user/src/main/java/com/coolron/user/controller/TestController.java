@@ -1,5 +1,6 @@
 package com.coolron.user.controller;
 
+import com.coolron.user.config.LoadBalancer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -24,6 +25,10 @@ public class TestController {
     @Autowired
     private RestTemplate restTemplate;
 
+    // 自定义 负载均衡器
+    @Autowired
+    private LoadBalancer loadBalancer;
+
     /**
      * 作者对应的文章
      *
@@ -31,7 +36,10 @@ public class TestController {
     @GetMapping("getUserArticles")
     public Object getUserArticles(){
         List<ServiceInstance> instances = discoveryClient.getInstances("article-service");
-        ServiceInstance serviceInstance = instances.get(0);
+//        ServiceInstance serviceInstance = instances.get(0);
+
+        // 负载均衡器
+        ServiceInstance serviceInstance = loadBalancer.getSingleAddress(instances);
 
         URI uri = serviceInstance.getUri();
 
