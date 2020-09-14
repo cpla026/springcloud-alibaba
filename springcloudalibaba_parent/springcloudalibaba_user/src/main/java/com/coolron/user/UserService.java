@@ -24,6 +24,7 @@ public class UserService {
     }
 
     @Bean
+    @LoadBalanced
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
@@ -39,8 +40,7 @@ public class UserService {
 
         @RequestMapping(value = "/echo/{str}", method = RequestMethod.GET)
         public String echo(@PathVariable String str) {
-//            return restTemplate.getForObject("http://article-service/article/echo/" + str, String.class);
-            return restTemplate.getForObject("http://192.168.19.35:8050/article/echo/" + str, String.class);
+            return restTemplate.getForObject("http://article-service/article/echo/" + str, String.class);
         }
     }
 

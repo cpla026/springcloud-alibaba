@@ -31,19 +31,29 @@ public class TestController {
 
     /**
      * 作者对应的文章
-     *
      */
     @GetMapping("getUserArticles")
     public Object getUserArticles(){
         List<ServiceInstance> instances = discoveryClient.getInstances("article-service");
 //        ServiceInstance serviceInstance = instances.get(0);
 
-        // 负载均衡器
+        // 自定义负载均衡器
         ServiceInstance serviceInstance = loadBalancer.getSingleAddress(instances);
 
         URI uri = serviceInstance.getUri();
 
         List list = restTemplate.getForObject(uri + "/article/test/dto", List.class);
+        return list;
+    }
+
+    /**
+     * ribbon 负载均衡器
+     * @return
+     */
+    @GetMapping("getUserArticlesRibbon")
+    public Object getUserArticlesRibbon(){
+        // restTemplate 负载均衡器已经实现
+        List list = restTemplate.getForObject("http://article-service/article/test/dto", List.class);
         return list;
     }
 

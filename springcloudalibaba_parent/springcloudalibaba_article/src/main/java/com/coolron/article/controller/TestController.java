@@ -2,6 +2,8 @@ package com.coolron.article.controller;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,8 +18,13 @@ import java.util.Map;
 @RequestMapping(value = "/test")
 public class TestController {
 
+    @Value("${server.port}")
+    private String port;
+
     @GetMapping("/dto")
     public List list() {
+
+        System.out.println("+++article++serverport:" + port);
 
         List<Map<Object, Object>> list = Lists.newArrayList();
 
