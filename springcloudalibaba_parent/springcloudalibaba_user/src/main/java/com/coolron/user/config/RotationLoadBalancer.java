@@ -1,5 +1,6 @@
 package com.coolron.user.config;
 
+import com.coolron.user.config.LoadBalancer;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.stereotype.Component;
 
