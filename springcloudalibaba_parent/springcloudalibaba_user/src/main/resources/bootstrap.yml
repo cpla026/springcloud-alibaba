@@ -12,3 +12,5 @@ spring:
         # The default file extension of DataId is properties.
         # the dataId of nacos server is spring.application.name plus file-extension(user-service.properties)
         # file-extension: yaml
+  profiles:
+    active: dev
