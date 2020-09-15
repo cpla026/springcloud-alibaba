@@ -1,7 +1,7 @@
 server:
-  port: 8050
+  port: 8051
   servlet:
-    path: /article
+    context-path: /article
 spring:
   application:
     name: article-service

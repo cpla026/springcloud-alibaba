@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,5 +42,31 @@ public class TestController {
         list.add(articleMap2);
 
         return list;
+    }
+
+    @Value("${user.name}")
+    private String name;
+
+    @Value("${user.age}")
+    private String age;
+
+    @GetMapping("/config/{param}")
+    public String config(@PathVariable String param) {
+
+        String result = "";
+
+        switch (param) {
+            case "name":
+                result = name;
+                break;
+            case "age":
+                result = age;
+                break;
+            default:
+                result = name + age;
+                break;
+        }
+
+        return result;
     }
 }

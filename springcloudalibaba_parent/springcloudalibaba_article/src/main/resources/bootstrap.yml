@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    nacos:
+      config:
+        # config center address
+        server-addr: 127.0.0.1:8848
+        # config group
+        group: ARTICLE_SERVICE_GROUP
+        # The default file extension of DataId is properties.
+        # the dataId of nacos server is spring.application.name plus file-extension(user-service.properties)
+        file-extension: yaml
